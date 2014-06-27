@@ -10,13 +10,9 @@ GEM
     capybara-webkit (1.1.1)
       capybara (>= 2.0.2, < 2.2.0)
       json
-    httparty (0.13.1)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     json (1.8.1)
     mime-types (2.3)
     mini_portile (0.6.0)
-    multi_xml (0.5.5)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     rack (1.5.2)
@@ -24,7 +20,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    sass (3.2.19)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -43,8 +38,5 @@ PLATFORMS
 DEPENDENCIES
   capybara
   capybara-webkit
-  httparty
-  nokogiri
-  sass
   sinatra
   slim
