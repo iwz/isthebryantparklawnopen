@@ -2,12 +2,11 @@ doctype html
 html
   head
     title Is the Bryant Park Lawn Open?
-    meta name="keywords" content="bryan park lawn grass parks open or closed"
+    meta name="keywords" content="bryant park lawn grass parks open or closed"
     meta name="author" content="Ian Zabel; thoughtbot; @iwz"
+    meta name="description" content="Grass time?"
     link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css"
   body class=@open.downcase
-    header
-      h1 Is the Bryant Park Lawn Open?
     main
       h3 title=@lawn_message
         = @open
