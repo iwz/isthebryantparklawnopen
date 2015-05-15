@@ -39,6 +39,8 @@ class Lawn
 end
 
 get "/" do
+  cache_control :public, max_age: 1800  # 30 mins.
+
   lawn = Lawn.new
   @lawn_message = lawn.message
 
@@ -52,12 +54,16 @@ get "/" do
 end
 
 get "/api" do
+  cache_control :public, max_age: 1800  # 30 mins.
+
   content_type :json
 
   Lawn.new.to_json
 end
 
 get "/stylesheets/:name.css" do
+  cache_control :public, max_age: 1800  # 30 mins.
+
   scss :"/stylesheets/#{params[:name]}"
 end
 
