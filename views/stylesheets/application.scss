@@ -26,11 +26,11 @@ body {
 }
 
 body.yes:before {
-  @include backgrounds("http://104.131.171.229/wp-content/uploads/2014/04/bryantpark.jpg");
+  @include backgrounds("/images/open-min.jpg");
 }
 
 body.no:before {
-  @include backgrounds("https://interestinginnyc.files.wordpress.com/2013/05/img_5274.jpg");
+  @include backgrounds("/images/closed-min.jpg");
 }
 
 main {
