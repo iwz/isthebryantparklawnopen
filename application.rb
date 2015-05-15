@@ -1,10 +1,7 @@
-require "sinatra"
-require "slim"
-require "nokogiri"
+require "rubygems"
 require "open-uri"
-require "sass"
-require "pry"
-require "json"
+require "bundler"
+Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
 
 LAWN_OPEN_MESSAGES = ["The lawn is open for your enjoyment."]
 LAWN_CLOSED_MESSAGES = [
