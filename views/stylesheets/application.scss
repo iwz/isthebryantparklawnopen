@@ -1,0 +1,60 @@
+$small-screen: 420px;
+
+@import "bourbon/bourbon";
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:700);
+
+body {
+  font-size: 22px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  padding: 0;
+  margin: 0;
+  color: white;
+  text-shadow: 0 0 100px black;
+}
+
+@mixin backgrounds($url) {
+  @include position(absolute, 0 0 0 0);
+
+  content: "";
+  display: block;
+  opacity: 0.85;
+  z-index: -1;
+  background-image: url($url);
+  background-size: cover;
+  background-position: center center;
+}
+
+body.yes:before {
+  @include backgrounds("http://104.131.171.229/wp-content/uploads/2014/04/bryantpark.jpg");
+}
+
+body.no:before {
+  @include backgrounds("https://interestinginnyc.files.wordpress.com/2013/05/img_5274.jpg");
+}
+
+main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+header {
+  @include position(absolute, 0 0 null 0);
+}
+
+h1 {
+  font-size: 1em;
+  @include transition(all .5s);
+
+  @media (min-width: $small-screen) {
+    font-size: 3em;
+  }
+}
+
+h3 {
+  font-size: 11em;
+  margin: 0 0 25px;
+  text-transform: uppercase;
+}

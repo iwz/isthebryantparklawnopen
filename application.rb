@@ -1,8 +1,9 @@
 require "sinatra"
 require "slim"
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
+require "nokogiri"
+require "open-uri"
+require "sass"
+require "pry"
 
 LAWN_OPEN_MESSAGES = ["The lawn is open for your enjoyment."]
 LAWN_CLOSED_MESSAGES = [
@@ -25,4 +26,8 @@ get "/" do
   end
 
   slim :index
+end
+
+get "/stylesheets/:name.css" do
+  scss :"/stylesheets/#{params[:name]}"
 end
