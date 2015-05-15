@@ -5,6 +5,7 @@ html
     meta name="keywords" content="bryan park lawn grass parks open or closed"
     meta name="author" content="Ian Zabel; thoughtbot; @iwz"
     link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css"
-  body
+  body class=@open.downcase
     h1 Is the Bryant Park Lawn Open?
-    h3= @open
+    h3 title=@lawn_message
+      = @open

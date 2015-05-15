@@ -1,8 +1,15 @@
 body {
   font-color: white;
-  background-color: #B5D453;
   font-size: 22px;
   text-align: center;
+}
+
+body.yes {
+  background-color: #2ECC40;
+}
+
+body.no {
+  background-color: #FF4136;
 }
 
 h1 {
