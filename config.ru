@@ -1,12 +1,22 @@
 require './application'
 
-# Defined in ENV on Heroku. To try locally, start memcached and uncomment:
-ENV["MEMCACHE_SERVERS"] = "localhost"
-if memcache_servers = ENV["MEMCACHE_SERVERS"]
-  use Rack::Cache,
+if ENV["MEMCACHIER_SERVERS"]
+  client = Dalli::Client.new(
+    (ENV["MEMCACHIER_SERVERS"] || "").split(","),
+    username: ENV["MEMCACHIER_USERNAME"],
+    password: ENV["MEMCACHIER_PASSWORD"],
+    failover: true,
+    socket_timeout: 1.5,
+    socket_failure_delay: 0.2,
+    value_max_bytes: 10485760
+  )
+
+  use(
+    Rack::Cache,
     verbose: true,
-    metastore:   "memcached://#{memcache_servers}",
-    entitystore: "memcached://#{memcache_servers}"
+    metastore:   client,
+    entitystore: client
+  )
 end
 
 run Sinatra::Application
