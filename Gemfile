@@ -1,8 +1,7 @@
-ruby "2.2.4"
+ruby "2.3.4"
 
 source "https://rubygems.org"
 
-gem "nokogiri"
 gem "sinatra"
 gem "slim"
 gem "pry"
