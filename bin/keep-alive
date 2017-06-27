@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require "open-uri"
+
+if Time.now.hour > 12 # only run after 8am Eastern
+  puts "Loading site to keep dyno alive during business hours"
+
+  open "http://www.isthebryantparklawnopen.org"
+
+  puts "done."
+else
+  puts "Skipping dyno keep-alive. #{Time.now.hour} UTC > 12 UTC"
+end
