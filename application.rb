@@ -9,7 +9,7 @@ class Lawn
   end
 
   def message
-    page["page"]["lawnClosedExplanation"]
+    page["page"]["lawnClosedExplanation"].trim
   end
 
   def open?
@@ -34,7 +34,6 @@ get "/" do
 
   lawn = Lawn.new
   @lawn_message = lawn.message
-  puts @lawn_message
 
   if lawn.open?
     @open = "Yes"
