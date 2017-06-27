@@ -9,7 +9,7 @@ class Lawn
   end
 
   def message
-    page["page"]["lawnClosedExplanation"].trim
+    page["page"]["lawnClosedExplanation"].strip
   end
 
   def open?
