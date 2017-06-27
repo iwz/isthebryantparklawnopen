@@ -1,19 +1,23 @@
 require "rubygems"
 require "open-uri"
 require "bundler"
+require "dalli"
+require "./bryant_park_api"
 Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
+
 
 class Lawn
   def initialize
-    @page = JSON.load(open("http://bryantpark.org/json/pages-home"))
+    json = BryantParkApi.json
+    @page = json["page"]
   end
 
   def message
-    page["page"]["lawnClosedExplanation"].strip
+    page["lawnClosedExplanation"].strip
   end
 
   def open?
-    page["page"]["isParkOpen"]
+    page["isParkOpen"]
   end
 
   def to_json
@@ -30,7 +34,7 @@ class Lawn
 end
 
 get "/" do
-  cache_control :public, max_age: 1800  # 30 mins.
+  cache_control :public, max_age: 300  # 5 mins.
 
   lawn = Lawn.new
   @lawn_message = lawn.message
@@ -45,7 +49,7 @@ get "/" do
 end
 
 get "/api" do
-  cache_control :public, max_age: 1800  # 30 mins.
+  cache_control :public, max_age: 300  # 5 mins.
 
   content_type :json
 
@@ -58,4 +62,9 @@ get "/stylesheets/:name.css" do
   scss :"/stylesheets/#{params[:name]}"
 end
 
+get "/flush" do
+  BryantParkApi.clear
+
+  "ok"
+end
 

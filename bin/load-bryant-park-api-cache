@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path(".")
+require "bryant_park_api"
+
+puts "Loading Bryant Park JSON API into memcached"
+
+BryantParkApi.load
+
+puts "done."
