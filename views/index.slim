@@ -6,6 +6,12 @@ html
     meta name="author" content="Ian Zabel; thoughtbot; @iwz"
     meta name="description" content="Grass time? #{@open}. #{@lawn_message}"
     meta name="google-site-verification" content="7QAq7w6oNT5Y0aDBhxGMHV2lmxTd1JinDSeDD4bPD3c"
+    meta name="twitter:card" content="summary_large_image"
+    meta name="twitter:site" content="@bryantpark"
+    meta name="twitter:creator" content="@iwz"
+    meta name="twitter:title" content="Is the Bryant Park Lawn Open?"
+    meta name="twitter:description" content="Grass time? #{@open}. #{@lawn_message}"
+    meta name="twitter:image" content="http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=640x480&#{Time.now.to_f}"
     link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css"
   body class=@open.downcase
     main
