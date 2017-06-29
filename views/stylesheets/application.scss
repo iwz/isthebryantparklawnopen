@@ -26,7 +26,7 @@ body {
 }
 
 body.park:before {
-  background-image: url("http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=1920x1080");
+  @include backgrounds("/lawn-webcam.jpg");
 }
 
 body.yes:before {

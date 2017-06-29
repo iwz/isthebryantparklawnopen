@@ -2,6 +2,8 @@ require "rubygems"
 require "open-uri"
 require "bundler"
 require "dalli"
+require 'net/http'
+
 require "./bryant_park_api"
 Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
 
@@ -73,5 +75,13 @@ get "/flush" do
   BryantParkApi.clear
 
   "ok"
+end
+
+get "/lawn-webcam.jpg" do
+  content_type 'image/jpeg', charset: "utf-8"
+
+  uri = URI('http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=1920x1080')
+
+  Net::HTTP.get(uri)
 end
 
