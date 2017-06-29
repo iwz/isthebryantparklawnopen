@@ -5,6 +5,9 @@ require "dalli"
 require "./bryant_park_api"
 Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
 
+LAWN_OPEN_MESSAGES = [
+  "The Lawn is open"
+]
 
 class Lawn
   def initialize
@@ -13,11 +16,15 @@ class Lawn
   end
 
   def message
-    page["lawnClosedExplanation"].strip
+    "#{lawn_status} #{page["lawnClosedExplanation"].strip}"
+  end
+
+  def lawn_status
+    page["lawnStatus"]
   end
 
   def open?
-    page["isParkOpen"]
+    LAWN_OPEN_MESSAGES.include? lawn_status
   end
 
   def to_json
