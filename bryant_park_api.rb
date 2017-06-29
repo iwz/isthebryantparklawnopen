@@ -26,7 +26,7 @@ class BryantParkApi
   end
 
   def self.clear
-    DALLI.delete(CACHE_KEY)
+    DALLI.flush
   end
 end
 
