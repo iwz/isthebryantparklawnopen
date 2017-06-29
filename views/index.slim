@@ -13,7 +13,7 @@ html
     meta name="twitter:description" content="Grass time? #{@open}. #{@lawn_message}"
     meta name="twitter:image" content="http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=640x480&#{Time.now.to_f}"
     link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css"
-  body class=@open.downcase
+  body.park
     main
       h3 title=@lawn_message
         = @open
