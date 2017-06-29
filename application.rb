@@ -85,3 +85,11 @@ get "/lawn-webcam.jpg" do
   Net::HTTP.get(uri)
 end
 
+get "/lawn-webcam-thumb.jpg" do
+  content_type 'image/jpeg', charset: "utf-8"
+
+  uri = URI('http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=640x480')
+
+  Net::HTTP.get(uri)
+end
+
