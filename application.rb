@@ -5,6 +5,7 @@ require "dalli"
 require 'net/http'
 
 require "./bryant_park_api"
+require "./image"
 Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
 
 LAWN_OPEN_MESSAGES = [
@@ -93,3 +94,34 @@ get "/lawn-webcam-thumb.jpg" do
   Net::HTTP.get(uri)
 end
 
+get "/count" do
+  uri = URI('http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=1920x1080')
+  data = Net::HTTP.get(uri)
+  i = Image.new(data: data)
+
+  lawn = Lawn.new
+  @lawn_message = lawn.message
+
+  if i.count > 0
+    @open = "Yes (#{i.count})"
+  else
+    @open = "No (#{i.count})"
+  end
+
+  slim :index
+end
+
+get "/count-from-file" do
+  i = Image.new(source_image_path: "/Users/iwz/workspace/isthebryantparklawnopen/tmp/lawn-2017-06-29-16-11.jpg")
+
+  lawn = Lawn.new
+  @lawn_message = lawn.message
+
+  if i.count > 0
+    @open = "Yes (#{i.count})"
+  else
+    @open = "No (#{i.count})"
+  end
+
+  slim :index
+end

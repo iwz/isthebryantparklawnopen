@@ -10,3 +10,6 @@ gem "bourbon"
 gem "json"
 gem "dalli"
 gem "rack-cache"
+
+gem "ruby-opencv"
+
