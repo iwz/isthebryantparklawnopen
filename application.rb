@@ -112,7 +112,7 @@ get "/count" do
 end
 
 get "/count-from-file" do
-  i = Image.new(source_image_path: "/Users/iwz/workspace/isthebryantparklawnopen/tmp/lawn-2017-06-29-16-11.jpg")
+  i = Image.new(source_image_path: "./tmp/lawn-2017-06-29-16-11.jpg")
 
   lawn = Lawn.new
   @lawn_message = lawn.message

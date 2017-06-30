@@ -16,7 +16,7 @@ class Image
                    end
     lawn_rectangle = source_image.sub_rect(CvRect.new(630, 131, 1027, 167))
 
-    detector = CvHaarClassifierCascade::load("/Users/iwz/workspace/isthebryantparklawnopen/lib/haar_cascade_sets/haarcascade_fullbody.xml")
+    detector = CvHaarClassifierCascade::load("./lib/haar_cascade_sets/haarcascade_fullbody.xml")
 
     detector.detect_objects(
       lawn_rectangle,
