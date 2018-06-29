@@ -10,3 +10,9 @@ gem "bourbon"
 gem "json"
 gem "dalli"
 gem "rack-cache"
+
+group :development, :test do
+  gem "rspec"
+  gem "capybara"
+  gem "webmock"
+end
