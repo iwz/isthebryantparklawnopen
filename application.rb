@@ -52,7 +52,7 @@ class Lawn
     humidity = (forecast_f.currently.humidity * 100).round
     weather_icon = WEATHER_ICONS.fetch(forecast_f.currently.icon, "")
 
-    "#{forecast_f.minutely.summary} #{weather_icon} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
+    "#{weather_icon} #{forecast_f.minutely.summary} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
   end
 
   def to_json
