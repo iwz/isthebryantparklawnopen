@@ -1,11 +1,16 @@
 require "rubygems"
+require "dotenv/load"
 require "open-uri"
 require "bundler"
 require "dalli"
-require 'net/http'
-
+require "net/http"
+require "forecast_io"
 require "./bryant_park_api"
+
 Bundler.require :default, (ENV["RACK_ENV"] || "development").to_sym
+ForecastIO.configure do |configuration|
+  configuration.api_key = ENV.fetch("DARK_SKY_API_KEY")
+end
 
 LAWN_OPEN_MESSAGES = [
   "The Lawn is open"
@@ -18,7 +23,7 @@ class Lawn
   end
 
   def message
-    "#{lawn_status} #{page["lawnClosedExplanation"].strip}"
+    "#{lawn_status} #{page["lawnClosedExplanation"].strip}\n#{weather}"
   end
 
   def lawn_status
@@ -27,6 +32,15 @@ class Lawn
 
   def open?
     LAWN_OPEN_MESSAGES.include? lawn_status
+  end
+
+  def weather
+    forecast_f = ForecastIO.forecast(40.753597, -73.983231)
+    forecast_c = ForecastIO.forecast(40.753597, -73.983231, params: { units: 'si' })
+    temp_f = forecast_f.currently.temperature.round
+    temp_c = forecast_c.currently.temperature.round
+    humidity = (forecast_f.currently.humidity * 100).round
+    "#{forecast_f.minutely.summary} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
   end
 
   def to_json

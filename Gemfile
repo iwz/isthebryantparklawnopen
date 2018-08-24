@@ -2,14 +2,16 @@ ruby "2.5.1"
 
 source "https://rubygems.org"
 
+gem "bourbon"
+gem "dalli"
+gem "dotenv"
+gem "forecast_io"
+gem "json"
+gem "pry"
+gem "rack-cache"
+gem "sassc"
 gem "sinatra"
 gem "slim"
-gem "pry"
-gem "sassc"
-gem "bourbon"
-gem "json"
-gem "dalli"
-gem "rack-cache"
 
 group :development, :test do
   gem "rspec"
