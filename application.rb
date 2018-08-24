@@ -45,14 +45,15 @@ class Lawn
   end
 
   def weather
-    forecast_f = ForecastIO.forecast(40.753597, -73.983231)
-    forecast_c = ForecastIO.forecast(40.753597, -73.983231, params: { units: 'si' })
-    temp_f = forecast_f.currently.temperature.round
-    temp_c = forecast_c.currently.temperature.round
-    humidity = (forecast_f.currently.humidity * 100).round
-    weather_icon = WEATHER_ICONS.fetch(forecast_f.currently.icon, "")
+    forecast = ForecastIO.forecast(40.753597, -73.983231, params: {
+      exclude: "hourly,daily,alerts,flags",
+    })
+    temp_f = forecast.currently.temperature.round
+    temp_c = ((temp_f - 32) / 1.8).round
+    humidity = (forecast.currently.humidity * 100).round
+    weather_icon = WEATHER_ICONS.fetch(forecast.currently.icon, "")
 
-    "#{weather_icon} #{forecast_f.minutely.summary} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
+    "#{weather_icon} #{forecast.minutely.summary} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
   end
 
   def to_json
