@@ -17,6 +17,16 @@ LAWN_OPEN_MESSAGES = [
 ]
 
 class Lawn
+  WEATHER_ICONS = {
+    "clear-day" => "☀️",
+    "rain" => "☔️",
+    "snow" => "❄️",
+    "sleet" => "🌨",
+    "wind" => "💨",
+    "cloudy" => "⛅️",
+    "partly-cloudy-day" => "🌤",
+  }
+
   def initialize
     json = BryantParkApi.json
     @page = json["page"]
@@ -40,7 +50,9 @@ class Lawn
     temp_f = forecast_f.currently.temperature.round
     temp_c = forecast_c.currently.temperature.round
     humidity = (forecast_f.currently.humidity * 100).round
-    "#{forecast_f.minutely.summary} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
+    weather_icon = WEATHER_ICONS.fetch(forecast_f.currently.icon, "")
+
+    "#{forecast_f.minutely.summary} #{weather_icon} #{temp_f}°F/#{temp_c}°C/#{humidity}% humidity"
   end
 
   def to_json
