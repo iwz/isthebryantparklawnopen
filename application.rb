@@ -79,17 +79,42 @@ end
 
 get "/lawn-webcam.jpg" do
   content_type 'image/jpeg', charset: "utf-8"
-
   uri = URI('http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=1920x1080')
 
-  Net::HTTP.get(uri)
+  lawn = Lawn.new
+  send_lawn_image(lawn, uri)
 end
 
 get "/lawn-webcam-thumb.jpg" do
   content_type 'image/jpeg', charset: "utf-8"
-
   uri = URI('http://webcam.bryantpark.org/axis-cgi/jpg/image.cgi?resolution=640x480')
 
-  Net::HTTP.get(uri)
+  lawn = Lawn.new
+  send_lawn_image(lawn, uri)
 end
 
+helpers do
+  def send_lawn_image(lawn, uri)
+    begin
+      head = Net::HTTP.start(uri.host, uri.port) do |http|
+        http.head(uri.request_uri)
+      end
+
+      if head.code == "200"
+        Net::HTTP.get(uri)
+      else
+        send_default_lawn_image(lawn)
+      end
+    rescue StandardError
+      send_default_lawn_image(lawn)
+    end
+  end
+
+  def send_default_lawn_image(lawn)
+    if lawn.open?
+      send_file 'public/images/open-min.jpg'
+    else
+      send_file 'public/images/closed-min.jpg'
+    end
+  end
+end
